@@ -22,6 +22,11 @@ namespace Todo.Domain.Entities
       Done = true;
     }
 
+    public void MarkAsUndone()
+    {
+      Done = false;
+    }
+
     public void UpdateTitle(string title)
     {
       Title = title;
