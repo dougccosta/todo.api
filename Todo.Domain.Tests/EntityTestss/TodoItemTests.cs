@@ -2,7 +2,7 @@ using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Todo.Domain.Entities;
 
-namespace Todo.Domain.Tests.EntityTestss
+namespace Todo.Domain.Tests.EntityTests
 {
     [TestClass]
     public class TodoItemTests
