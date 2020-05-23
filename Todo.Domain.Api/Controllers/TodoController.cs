@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Todo.Domain.Commands;
 using Todo.Domain.Entities;
@@ -10,6 +12,7 @@ namespace Todo.Api.Controllers
 {
   [ApiController]
   [Route("v1/todos")]
+  [Authorize]
   public class TodoController : ControllerBase
   {
 
@@ -19,7 +22,8 @@ namespace Todo.Api.Controllers
       [FromServices]ITodoRepository repository
     )
     {
-      return repository.GetAll("DouglasCosta");
+      var user = User.Claims.FirstOrDefault(x => x.Type  == "user_id")?.Value;
+      return repository.GetAll(user);
     }
 
     [Route("done")]
@@ -28,7 +32,8 @@ namespace Todo.Api.Controllers
       [FromServices]ITodoRepository repository
     )
     {
-      return repository.GetAllDone("DouglasCosta");
+      var user = User.Claims.FirstOrDefault(x => x.Type  == "user_id")?.Value;
+      return repository.GetAllDone(user);
     }
 
     [Route("undone")]
@@ -37,7 +42,8 @@ namespace Todo.Api.Controllers
       [FromServices]ITodoRepository repository
     )
     {
-      return repository.GetAllUndone("DouglasCosta");
+      var user = User.Claims.FirstOrDefault(x => x.Type  == "user_id")?.Value;
+      return repository.GetAllUndone(user);
     }
 
     [Route("done/today")]
@@ -46,7 +52,8 @@ namespace Todo.Api.Controllers
       [FromServices]ITodoRepository repository
     )
     {
-      return repository.GetByPediod("DouglasCosta",
+      var user = User.Claims.FirstOrDefault(x => x.Type  == "user_id")?.Value;
+      return repository.GetByPediod(user,
                                     DateTime.Now.Date,
                                     true);
     }
@@ -57,7 +64,8 @@ namespace Todo.Api.Controllers
       [FromServices]ITodoRepository repository
     )
     {
-      return repository.GetByPediod("DouglasCosta",
+      var user = User.Claims.FirstOrDefault(x => x.Type  == "user_id")?.Value;
+      return repository.GetByPediod(user,
                                     DateTime.Now.Date,
                                     false);
     }
@@ -68,7 +76,8 @@ namespace Todo.Api.Controllers
       [FromServices]ITodoRepository repository
     )
     {
-      return repository.GetByPediod("DouglasCosta",
+      var user = User.Claims.FirstOrDefault(x => x.Type  == "user_id")?.Value;
+      return repository.GetByPediod(user,
                                     DateTime.Now.Date.AddDays(1),
                                     true);
     }
@@ -79,7 +88,8 @@ namespace Todo.Api.Controllers
       [FromServices]ITodoRepository repository
     )
     {
-      return repository.GetByPediod("DouglasCosta",
+      var user = User.Claims.FirstOrDefault(x => x.Type  == "user_id")?.Value;
+      return repository.GetByPediod(user,
                                     DateTime.Now.Date.AddDays(1),
                                     false);
     }
@@ -91,7 +101,7 @@ namespace Todo.Api.Controllers
       [FromServices]TodoHandler handler
     )
     {
-      command.User = "DouglasCosta";
+      command.User = User.Claims.FirstOrDefault(x => x.Type  == "user_id")?.Value;
       return (GenericCommandResult)handler.Handle(command);
     }
 
@@ -102,7 +112,7 @@ namespace Todo.Api.Controllers
       [FromServices]TodoHandler handler
     )
     {
-      command.User = "DouglasCosta";
+      command.User = User.Claims.FirstOrDefault(x => x.Type  == "user_id")?.Value;
       return (GenericCommandResult)handler.Handle(command);
     }
 
@@ -113,7 +123,7 @@ namespace Todo.Api.Controllers
       [FromServices]TodoHandler handler
     )
     {
-      command.User = "DouglasCosta";
+      command.User = User.Claims.FirstOrDefault(x => x.Type  == "user_id")?.Value;
       return (GenericCommandResult)handler.Handle(command);
     }
 
@@ -124,7 +134,7 @@ namespace Todo.Api.Controllers
       [FromServices]TodoHandler handler
     )
     {
-      command.User = "DouglasCosta";
+      command.User = User.Claims.FirstOrDefault(x => x.Type  == "user_id")?.Value;
       return (GenericCommandResult)handler.Handle(command);
     }
   }
