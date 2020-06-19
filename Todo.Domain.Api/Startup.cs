@@ -40,7 +40,7 @@ namespace Todo.Domain.Api
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                   ValidateIssuer = true,
-                  ValidIssuer = "https://securetoken.google.comproject-5848882175136562075",
+                  ValidIssuer = "https://securetoken.google.com/project-5848882175136562075",
                   ValidateAudience = true,
                   ValidAudience = "project-5848882175136562075",
                   ValidateLifetime = true
